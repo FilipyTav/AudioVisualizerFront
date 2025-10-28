@@ -10,20 +10,10 @@
 <script>
 	import logo from "$lib/assets/logo.png";
     import bg from "$lib/assets/bg.jpg"
+    import Nav from "$lib/components/nav.svelte";
 </script>
 
-<nav class="bg-black relative min-h-15">
-    <ul class="flex absolute top-0 bottom-0 left-0 right-0 items-center justify-center">
-        <!-- <li class="">
-            <img class="text-white w-15" src={logo} alt="logo.png">
-        </li> -->
-        <li>
-            <p class="text-white text-lg">
-                Bugados Birds
-            </p>
-        </li>
-    </ul>
-</nav>
+<Nav/>
 
 <section class="">
     <div class="m-auto mt-3 w-4/5 h-[80vh] rounded-lg bg-white/20 backdrop-blur-sm p-6 shadow-lg">
