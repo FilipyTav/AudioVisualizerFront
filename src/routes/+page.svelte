@@ -1,3 +1,10 @@
+<style lang="postcss">
+@reference "tailwindcss";
+:global(body) {    
+    min-height: 100vh;
+}
+</style>
+
 <script>
 	import logo from "$lib/assets/logo.png";
 </script>
@@ -9,8 +16,12 @@
         </li> -->
         <li>
             <p class="text-white text-lg">
-                Identificação de som
+                Bugados Birds
             </p>
         </li>
     </ul>
 </nav>
+
+<section class="m-auto mt-3 bg-gray-200 w-4/5 h-[80vh] rounded-lg">
+
+</section>
