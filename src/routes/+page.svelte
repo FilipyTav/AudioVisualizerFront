@@ -3,6 +3,7 @@
 :global(body) {    
     min-height: 100vh;
     background-image: url('$lib/assets/bg.jpg');
+    background-size: cover;
 }
 </style>
 
