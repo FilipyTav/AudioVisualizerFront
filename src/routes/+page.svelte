@@ -2,11 +2,13 @@
 @reference "tailwindcss";
 :global(body) {    
     min-height: 100vh;
+    background-image: url('$lib/assets/bg.jpg');
 }
 </style>
 
 <script>
 	import logo from "$lib/assets/logo.png";
+    import bg from "$lib/assets/bg.jpg"
 </script>
 
 <nav class="bg-black relative min-h-15">
@@ -22,6 +24,8 @@
     </ul>
 </nav>
 
-<section class="m-auto mt-3 bg-gray-200 w-4/5 h-[80vh] rounded-lg">
+<section class="">
+    <div class="m-auto mt-3 bg-gray-200 w-4/5 h-[80vh] rounded-lg">
 
+    </div>
 </section>
