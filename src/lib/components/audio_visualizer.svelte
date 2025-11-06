@@ -1,25 +1,42 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  let ping = false;
+	interface Ping {
+		id: number;
+	}
 
-  onMount(() => {
-    const interval = setInterval(() => {
-      ping = true;
-      setTimeout(() => {
-        ping = false;
-      }, 1 * 1000); // matches animation duration
-    }, 2 * 1000); // ping effect every 2 seconds
+	let pings: Ping[] = [];
+	let nextId = 0;
 
-    return () => clearInterval(interval);
-  });
+	const ping_activate = () => {
+		const id = nextId++;
+		pings = [...pings, { id }];
+	
+		// Remove ping after 1 second (animation duration)
+		setTimeout(() => {
+			pings = pings.filter(p => p.id !== id);
+		}, .93 * 1000);
+  }
 </script>
 
-<div class="relative w-16 h-16">
-  <div class="absolute inset-0 rounded-full bg-purple-600"></div>
-  {#if ping}
-    <div class="absolute inset-0 rounded-full bg-purple-400 opacity-75 animate-ping"></div>
-  {/if}
-</div>
+<button onclick={ping_activate} class="relative w-50 h-50 cursor-pointer">
+	<!-- <div
+	class="absolute inset-0 rounded-full bg-purple-400 opacity-75 animate-pulse"
+	style="pointer-events: none;"
+	></div> -->
+
+	<div class="
+	rounded-full w-50 aspect-square inline-block animate-pulse
+	bg-[radial-gradient(circle,rgba(109,11,121,1)_50%,rgba(50,255,100,1)_80%)] 
+	absolute inset-0
+	"></div>
+	{#each pings as ping (ping.id)}
+		<div
+		class="
+		absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(109,11,121,1)_50%,rgba(50,255,100,1)_80%)] opacity-75 animate-ping
+		"
+		style="pointer-events: none;"
+		></div>
+	{/each}
+</button>
 
 <!-- <script lang="ts">
 	let { logo } = $props();
