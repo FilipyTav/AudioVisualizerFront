@@ -19,23 +19,26 @@
   }
 </script>
 
+<!-- 90deg #58b873 #8259f0 -->
 <button onclick={ping_activate} class="relative w-80 h-80 cursor-pointer grid place-items-center-safe">
 	<div>
+		<!-- bg-[radial-gradient(circle,rgba(109,11,121,1)_50%,rgba(50,255,100,1)_80%)]  -->
 		<img src={logo} alt="Logo center" class="w-sm relative z-1">
 		<div class="
 		rounded-full w-80 aspect-square inline-block animate-pulse
-		bg-[radial-gradient(circle,rgba(109,11,121,1)_50%,rgba(50,255,100,1)_80%)] 
 		absolute inset-0 
+		circle-pulse
 	"></div>
 	</div>
 	{#each pings as ping (ping.id)}
 		<div
 		class="
 		absolute inset-0 rounded-full opacity-75 animate-ping
-		bg-[radial-gradient(circle,rgba(109,11,121,1)_50%,rgba(50,255,100,1)_80%)] 
+		circle-pulse
 		"
 		style="pointer-events: none;"
-		></div>
+		>
+	</div>
 	{/each}
 </button>
 
@@ -50,8 +53,8 @@ before:bg-[radial-gradient(circle,rgba(109,11,121,1)_50%,rgba(50,255,100,1)_80%)
 @reference "tailwindcss";  
 @tailwind utilities;
 
-/* .circle-pulse {
-@apply bg-[radial-gradient(circle,rgba(109,11,121,1)_50%,rgba(50,255,100,1)_80%)],
- rounded-full;
-} */
+.circle-pulse {
+	@apply 
+	bg-linear-90 from-[#58b873] to-[#8259f0];
+}
 </style>
