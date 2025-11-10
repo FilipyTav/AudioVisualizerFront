@@ -4,6 +4,9 @@
     min-height: 100vh;
     background-image: url('$lib/assets/bg.png');
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 </style>
 
