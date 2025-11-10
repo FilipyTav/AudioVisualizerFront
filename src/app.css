@@ -2,16 +2,27 @@
 
 @theme {
     --animate-heartbeat: heartbeat 1s ease-out infinite;
-
     @keyframes heartbeat {
         0%, 100% {
             transform: scale(1);
         }
         25%, 75% {
-            transform: scale(1.1)
+            transform: scale(1.1);
         }
         50% {
             transform: scale(1.2);
+        }
+    }
+
+    --animate-go-down: go-down 1s ease-out;
+    @keyframes go-down {
+        from: {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+        to: {
+            opacity: 0;
+            transform: translate(0, 100px);
         }
     }
 }
