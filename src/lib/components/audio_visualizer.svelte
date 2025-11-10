@@ -25,8 +25,9 @@
 		<!-- bg-[radial-gradient(circle,rgba(109,11,121,1)_50%,rgba(50,255,100,1)_80%)]  -->
 		<img src={logo} alt="Logo center" class="w-sm relative z-1">
 		<div class="
-		rounded-full w-80 aspect-square inline-block animate-pulse
-		absolute inset-0 p-20 box-border
+		rounded-full w-80 aspect-square inline-block 
+        animate-[spin_3s_linear_infinite]
+		absolute inset-0 
         border-gradient
         "></div>
 	</div>

@@ -1,1 +1,17 @@
 @import 'tailwindcss';
+
+@theme {
+    --animate-heartbeat: heartbeat 1s ease-out infinite;
+
+    @keyframes heartbeat {
+        0%, 100% {
+            transform: scale(1);
+        }
+        25%, 75% {
+            transform: scale(1.1)
+        }
+        50% {
+            transform: scale(1.2);
+        }
+    }
+}
