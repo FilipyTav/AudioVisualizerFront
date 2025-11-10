@@ -4,7 +4,6 @@
     min-height: 100vh;
     background-image: url('$lib/assets/bg.png');
     background-size: cover;
-    overflow: hidden;
 }
 </style>
 
@@ -19,6 +18,6 @@
 
 <section class="">
 	<div class="m-auto mt-3 w-4/5 h-[80vh] rounded-lg bg-white/20 backdrop-blur-[3px] p-6 shadow-lg grid place-items-center-safe">
-	<AudioVisualizer {logo} />
+        <AudioVisualizer {logo} />
     </div>
 </section>
