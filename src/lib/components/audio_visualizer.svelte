@@ -26,10 +26,11 @@
 		<img src={logo} alt="Logo center" class="w-sm relative z-1">
 		<div class="
 		rounded-full w-80 aspect-square inline-block animate-pulse
-		absolute inset-0 
-		circle-pulse
-	"></div>
+		absolute inset-0 p-20 box-border
+        border-gradient
+        "></div>
 	</div>
+
 	{#each pings as ping (ping.id)}
 		<div
 		class="
@@ -54,7 +55,15 @@ before:bg-[radial-gradient(circle,rgba(109,11,121,1)_50%,rgba(50,255,100,1)_80%)
 @tailwind utilities;
 
 .circle-pulse {
-	@apply 
-	bg-linear-90 from-[#58b873] to-[#8259f0];
+    @apply 
+    bg-linear-90 from-[#58b873] to-[#8259f0];
 }
+
+.border-gradient {
+    border: 15px solid transparent; /* thickness of border */
+    background: 
+        linear-gradient(#5b5c5b, #5b5b5a) padding-box, /* transparent inner */
+        linear-gradient(to right, #58b873, #8259f0) border-box; /* gradient border */
+}
+
 </style>
