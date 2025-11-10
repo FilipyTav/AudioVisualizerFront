@@ -39,17 +39,10 @@
 		circle-pulse
 		"
 		style="pointer-events: none;"
-		>
-	</div>
+		></div>
 	{/each}
 </button>
 
-
-<!-- <div class="before:rounded-full before:w-5 before:aspect-square before:inline-block before:animate-ping
-before:bg-[radial-gradient(circle,rgba(109,11,121,1)_50%,rgba(50,255,100,1)_80%)] 
-"> -->
-
-<!-- </div> -->
 
 <style lang="postcss">  
 @reference "tailwindcss";  
