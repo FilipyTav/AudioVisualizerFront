@@ -20,11 +20,11 @@
 </script>
 
 <!-- 90deg #58b873 #8259f0 -->
-<button onclick={ping_activate} class="relative w-80 h-80 cursor-pointer grid place-items-center-safe">
+<button onclick={ping_activate} class="relative md:w-xs sm:w-sm aspect-square cursor-pointer grid place-items-center-safe">
 	<div>
 		<img src={logo} alt="Logo center" class="w-sm relative z-1 pointer-events-none">
 		<div class="
-		rounded-full w-80 aspect-square inline-block 
+		rounded-full aspect-square inline-block 
         animate-[spin_3s_linear_infinite]
 		absolute inset-0 
         border-gradient

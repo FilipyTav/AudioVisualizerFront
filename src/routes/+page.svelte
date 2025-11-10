@@ -16,7 +16,7 @@
 
 <Nav/>
 
-<section class="">
+<section class="overflow-hidden">
 	<div class="m-auto mt-3 w-4/5 h-[80vh] rounded-lg bg-white/20 backdrop-blur-[3px] p-6 shadow-lg grid place-items-center-safe">
         <AudioVisualizer {logo} />
     </div>
