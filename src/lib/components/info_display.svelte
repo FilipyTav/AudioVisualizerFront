@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { fly } from 'svelte/transition';
+
     interface Paragraph {
         text: string;
         row_start: number;

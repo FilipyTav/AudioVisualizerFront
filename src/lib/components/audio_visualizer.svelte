@@ -16,11 +16,15 @@
 		setTimeout(() => {
 			pings = pings.filter(p => p.id !== id);
 		}, .93 * 1000);
-  }
+    }
+
+    import { fly } from 'svelte/transition';
 </script>
 
 <!-- 90deg #58b873 #8259f0 -->
-<button onclick={ping_activate} class="relative md:w-xs sm:w-sm aspect-square cursor-pointer grid place-items-center-safe">
+<button in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}} 
+    onclick={ping_activate} 
+    class="relative md:w-xs sm:w-sm aspect-square cursor-pointer grid place-items-center-safe">
 	<div>
 		<img src={logo} alt="Logo center" class="w-sm relative z-1 pointer-events-none">
 		<div class="

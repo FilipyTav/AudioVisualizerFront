@@ -14,7 +14,7 @@
         }
     }
 
-    --animate-go-down: go-down 1s ease-out;
+    --animate-down: go-down 1s ease-out;
     @keyframes go-down {
         from: {
             opacity: 1;
@@ -22,7 +22,8 @@
         }
         to: {
             opacity: 0;
-            transform: translate(0, 100px);
+            transform: translate(0, 100vh);
+            display: none;
         }
     }
 }
