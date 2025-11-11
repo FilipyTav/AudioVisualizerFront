@@ -20,6 +20,7 @@
     import bg from "$lib/assets/bg.png"
     import Nav from "$lib/components/nav.svelte";
     import AudioVisualizer from "$lib/components/audio_visualizer.svelte";
+    import InfoDisplay from "$lib/components/info_display.svelte";
 </script>
 
 <Nav/>
@@ -28,6 +29,7 @@
 	<div class="mx-auto my-10 
         w-4/5 h-9/10 rounded-lg bg-white/20 backdrop-blur-[3px] p-6 shadow-lg grid place-items-center-safe
         ">
-            <AudioVisualizer {logo} />
+            <!-- <AudioVisualizer {logo} /> -->
+            <InfoDisplay />
     </div>
 </section>
