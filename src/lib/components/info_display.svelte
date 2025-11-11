@@ -15,7 +15,8 @@
     ]
 </script>
 
-<div class="grid gap-3 
+<div in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}} 
+    class="grid gap-3 
     grid-cols-[repeat(5,_minmax(100px,_500px))] grid-rows-[repeat(5,_minmax(100px,_100px))]">
     <div class="bg-red-300
         row-start-1 row-span-2
