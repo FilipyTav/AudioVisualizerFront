@@ -24,7 +24,9 @@
 <!-- 90deg #58b873 #8259f0 -->
 <button in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}} 
     onclick={ping_activate} 
-    class="relative md:w-xs sm:w-sm aspect-square cursor-pointer grid place-items-center-safe">
+    class="relative md:w-xs sm:w-sm aspect-square cursor-pointer grid place-items-center-safe
+    col-start-1 row-start-1
+    ">
 	<div>
 		<img src={logo} alt="Logo center" class="w-sm relative z-1 pointer-events-none">
 		<div class="

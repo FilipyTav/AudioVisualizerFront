@@ -39,7 +39,8 @@
 
 <section class="overflow-hidden flex justify-center items-center">
 	<div class="mx-auto my-10 animate-down
-        w-4/5 h-9/10 rounded-lg bg-white/20 backdrop-blur-[3px] p-6 shadow-lg grid place-items-center-safe
+        w-4/5 h-9/10 rounded-lg bg-white/20 backdrop-blur-[3px] p-6 shadow-lg 
+        grid place-items-center-safe grid-rows-[1fr] grid-cols-[1fr]
         ">
         {#if show_visualizer}
             <AudioVisualizer {logo}/>
