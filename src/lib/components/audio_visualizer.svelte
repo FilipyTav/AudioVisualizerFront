@@ -1,28 +1,52 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { browser } from '$app/environment';
+    import { fly } from 'svelte/transition';
+	let { logo } = $props();
     import song from '$lib/assets/test.mp3'
 
     let audio: HTMLAudioElement;
+    let reader: FileReader | null = null;
 
     const play_audio = (): void => {
-        console.log(audio)
+        console.log(audio);
         if (audio.paused)
-            audio.play()
-        else audio.pause()
+            audio.play();
+        else audio.pause();
 
     }
 
     onMount(() => {
-    if (browser) {
-        audio = new Audio(song);
-        console.log(audio)
-        audio.checkVisibility
-      // Use audio.play(), etc here
-    }
+        reader =  new FileReader();
+        if (browser) {
+            audio = new Audio(song);
+            // console.log(audio);
+
+            (async () => {
+                const array_buffer = await load_new_audio(song);
+                console.log(array_buffer);
+
+                const audio_ctx: AudioContext = new AudioContext()
+                audio_ctx.decodeAudioData(array_buffer, (audio_buffer) => {
+                    console.log(audio_buffer)
+                })
+            })();
+        };
     });
 
-	let { logo } = $props();
+    const load_new_audio = async (audio: string): Promise<ArrayBuffer> => {
+        const array_buffer = await read_audio_array_buffer(audio);
+        return array_buffer
+    }
+
+    async function read_audio_array_buffer(url: string) {
+        const response = await fetch(url);          // Fetch the MP3 file
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const arrayBuffer = await response.arrayBuffer();  // Read the response as ArrayBuffer
+        return arrayBuffer;                          // Return the binary data
+    }
 
 	interface Ping {
 		id: number;
@@ -41,7 +65,6 @@
 		}, .93 * 1000);
     }
 
-    import { fly } from 'svelte/transition';
 </script>
 
 <!-- 90deg #58b873 #8259f0 -->
