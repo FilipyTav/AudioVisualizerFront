@@ -4,6 +4,7 @@
     import { fly } from 'svelte/transition';
 	let { logo } = $props();
     import song from '$lib/assets/test.mp3'
+    import { load_new_audio } from '$lib/utils/audio_processing';
 
     let audio: HTMLAudioElement;
     let reader: FileReader | null = null;
@@ -13,7 +14,6 @@
         if (audio.paused)
             audio.play();
         else audio.pause();
-
     }
 
     onMount(() => {
@@ -33,20 +33,6 @@
             })();
         };
     });
-
-    const load_new_audio = async (audio: string): Promise<ArrayBuffer> => {
-        const array_buffer = await read_audio_array_buffer(audio);
-        return array_buffer
-    }
-
-    async function read_audio_array_buffer(url: string) {
-        const response = await fetch(url);          // Fetch the MP3 file
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const arrayBuffer = await response.arrayBuffer();  // Read the response as ArrayBuffer
-        return arrayBuffer;                          // Return the binary data
-    }
 
 	interface Ping {
 		id: number;
