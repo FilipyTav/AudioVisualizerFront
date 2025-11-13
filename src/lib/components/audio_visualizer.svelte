@@ -1,4 +1,27 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
+    import { browser } from '$app/environment';
+    import song from '$lib/assets/test.mp3'
+
+    let audio: HTMLAudioElement;
+
+    const play_audio = (): void => {
+        console.log(audio)
+        if (audio.paused)
+            audio.play()
+        else audio.pause()
+
+    }
+
+    onMount(() => {
+    if (browser) {
+        audio = new Audio(song);
+        console.log(audio)
+        audio.checkVisibility
+      // Use audio.play(), etc here
+    }
+    });
+
 	let { logo } = $props();
 
 	interface Ping {
@@ -11,7 +34,7 @@
 	const ping_activate = () => {
 		const id = nextId++;
 		pings = [...pings, { id }];
-	
+
 		// Remove ping after 1 second (animation duration)
 		setTimeout(() => {
 			pings = pings.filter(p => p.id !== id);
@@ -22,17 +45,17 @@
 </script>
 
 <!-- 90deg #58b873 #8259f0 -->
-<button in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}} 
-    onclick={ping_activate} 
+<button in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}}
+    onclick={ping_activate}
     class="relative md:w-xs sm:w-sm aspect-square cursor-pointer grid place-items-center-safe
     col-start-1 row-start-1
     ">
 	<div>
 		<img src={logo} alt="Logo center" class="w-sm relative z-1 pointer-events-none">
 		<div class="
-		rounded-full aspect-square inline-block 
+		rounded-full aspect-square inline-block
         animate-[spin_3s_linear_infinite]
-		absolute inset-0 
+		absolute inset-0
         border-gradient
         "></div>
 	</div>
@@ -49,18 +72,18 @@
 </button>
 
 
-<style lang="postcss">  
-@reference "tailwindcss";  
+<style lang="postcss">
+@reference "tailwindcss";
 @tailwind utilities;
 
 .circle-pulse {
-    @apply 
+    @apply
     bg-linear-90 from-[#58b873] to-[#8259f0];
 }
 
 .border-gradient {
     border: 15px solid transparent; /* thickness of border */
-    background: 
+    background:
         linear-gradient(#5b5c5b, #5b5b5a) padding-box, /* transparent inner */
         linear-gradient(to right, #58b873, #8259f0) border-box; /* gradient border */
 }
