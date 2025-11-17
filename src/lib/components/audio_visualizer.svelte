@@ -51,6 +51,14 @@
 		}, .93 * 1000);
     }
 
+    const send_audio = async (e: Event) => {
+        const target = e.target as HTMLInputElement
+        const file = target.files?.[0];
+
+        if (!file) return;
+        console.log(file)
+    }
+
 </script>
 
 <!-- 90deg #58b873 #8259f0 -->
@@ -62,6 +70,7 @@
 	<div>
 		<img src={logo} alt="Logo center" class="w-sm relative z-1 pointer-events-none">
         <input type="file" id="audio_input" accept=".wav,.mp3,.ogg"
+        onchange={send_audio}
         class="hidden">
 		<div class="
 		rounded-full aspect-square inline-block
