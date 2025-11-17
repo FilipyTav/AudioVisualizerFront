@@ -9,6 +9,9 @@
     let audio: HTMLAudioElement;
     let reader: FileReader | null = null;
 
+    // In seconds
+    const ping_interval: number = .2;
+
     // const play_audio = (): void => {
     //     console.log(audio);
     //     if (audio.paused)
@@ -65,8 +68,8 @@
         try {
             const ping_id: number = setInterval(() => {
                 console.log("ping")
-                ping_activate()
-            }, .5 * 1000);
+                if (Math.random() < 0.5) ping_activate()
+            }, ping_interval * 1000);
 
             const response = await fetch(API_URL, {
                 method: 'POST',
