@@ -9,30 +9,30 @@
     let audio: HTMLAudioElement;
     let reader: FileReader | null = null;
 
-    const play_audio = (): void => {
-        console.log(audio);
-        if (audio.paused)
-            audio.play();
-        else audio.pause();
-    }
+    // const play_audio = (): void => {
+    //     console.log(audio);
+    //     if (audio.paused)
+    //         audio.play();
+    //     else audio.pause();
+    // }
 
-    onMount(() => {
-        reader =  new FileReader();
-        if (browser) {
-            audio = new Audio(song);
-            // console.log(audio);
-
-            (async () => {
-                const array_buffer = await load_new_audio(song);
-                console.log(array_buffer);
-
-                const audio_ctx: AudioContext = new AudioContext()
-                audio_ctx.decodeAudioData(array_buffer, (audio_buffer) => {
-                    console.log(audio_buffer)
-                })
-            })();
-        };
-    });
+    // onMount(() => {
+    //     reader =  new FileReader();
+    //     if (browser) {
+    //         audio = new Audio(song);
+    //         // console.log(audio);
+    //
+    //         (async () => {
+    //             const array_buffer = await load_new_audio(song);
+    //             console.log(array_buffer);
+    //
+    //             const audio_ctx: AudioContext = new AudioContext()
+    //             audio_ctx.decodeAudioData(array_buffer, (audio_buffer) => {
+    //                 console.log(audio_buffer)
+    //             })
+    //         })();
+    //     };
+    // });
 
 	interface Ping {
 		id: number;
@@ -62,8 +62,6 @@
         const file = target.files?.[0];
 
         if (!file) return;
-        console.log(file)
-        // analyzing = true
 
         const form_data: FormData = new FormData();
         form_data.append('audio_file', file);
@@ -75,18 +73,15 @@
             });
 
             const data = await response.json();
-            console.log(data);
 
             if (response.ok) { // Status 200
                 resulting_data["certainty"] =  data["certeza_percentual"]
                 resulting_data["result"] = map_to_db[data["classe_predita"]]
-                console.log(resulting_data)
                 hide_vis()
             } else {
             }
         } catch (error) {
             console.error('Erro de Rede ou JSON Inválido:', error);
-            // resultadoDiv.innerHTML = '&lt;h2&gt;🛑 Erro de Conexão&lt;/h2&gt;&lt;p&gt;Verifique se o servidor Flask está rodando.&lt;/p&gt;';
         }
     }
 
