@@ -1,4 +1,6 @@
 <script lang="ts">
+	let { resulting_data } = $props();
+    import db from '$lib/assets/info.json'
     import { fly } from 'svelte/transition';
 
     interface Paragraph {
@@ -8,6 +10,8 @@
         col_start: number;
         col_span: number;
     }
+    const data = db.find(bird => bird.name === resulting_data["result"])
+    console.log()
 
     const paragraphs: Paragraph[] = [
         {text: "", row_start: 1, row_span: 2, col_start: 3, col_span: 3},
@@ -27,16 +31,20 @@
         row-start-3 row-span-3
         "></div>
 
-    {#each paragraphs as para}
-        <p class="
-            break-all bg-green-500
+    {#each data?.info as para, i}
+        <div class="
+            break-all bg-green-500 p-5 break-normal
             "
             style={`
-            grid-column: ${para.col_start} / span ${para.col_span};
-            grid-row: ${para.row_start} / span ${para.row_span};
+            grid-column: ${paragraphs[i].col_start} / span ${paragraphs[i].col_span};
+            grid-row: ${paragraphs[i].row_start} / span ${paragraphs[i].row_span};
             `}
         >
-            {para.text}
-        </p>
+            {#if i === 0}
+                <p class="font-bold">{data?.name}</p>
+                <p class="font-bold">{data?.scientific_name}</p>
+            {/if}
+            {para}
+        </div>
     {/each}
 </div>

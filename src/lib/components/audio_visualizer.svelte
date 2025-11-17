@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import { browser } from '$app/environment';
     import { fly } from 'svelte/transition';
-	let { logo, hide_vis } = $props();
+	let { logo, hide_vis, resulting_data } = $props();
     import song from '$lib/assets/test.mp3'
     import { load_new_audio, map_to_db, type HashMap } from '$lib/utils/audio_processing';
 
@@ -53,10 +53,6 @@
     }
 
     const API_URL = 'http://127.0.0.1:5000/prever';
-    let resulting_data: HashMap = {
-        "result": "",
-        "certainty": "",
-    }
     const send_audio = async (e: Event) => {
         const target = e.target as HTMLInputElement
         const file = target.files?.[0];

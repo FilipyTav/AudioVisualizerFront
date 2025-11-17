@@ -20,6 +20,12 @@
     import Nav from "$lib/components/nav.svelte";
     import AudioVisualizer from "$lib/components/audio_visualizer.svelte";
     import InfoDisplay from "$lib/components/info_display.svelte";
+    import type { HashMap } from "$lib/utils/audio_processing";
+
+    let resulting_data: HashMap = {
+        "result": "",
+        "certainty": "",
+    }
 
     let show_visualizer: boolean = $state(true);
 
@@ -40,9 +46,9 @@
         grid place-items-center-safe grid-rows-[1fr] grid-cols-[1fr]
         ">
         {#if show_visualizer}
-            <AudioVisualizer {logo} {hide_vis}/>
+            <AudioVisualizer {logo} {hide_vis} {resulting_data}/>
         {:else}
-            <InfoDisplay />
+            <InfoDisplay {resulting_data}/>
         {/if}
     </div>
 </section>
