@@ -4,7 +4,7 @@
     import { fly } from 'svelte/transition';
 	let { logo } = $props();
     import song from '$lib/assets/test.mp3'
-    import { load_new_audio } from '$lib/utils/audio_processing';
+    import { load_new_audio, map_to_db, type HashMap } from '$lib/utils/audio_processing';
 
     let audio: HTMLAudioElement;
     let reader: FileReader | null = null;
@@ -53,6 +53,10 @@
     }
 
     const API_URL = 'http://127.0.0.1:5000/prever';
+    let resulting_data: HashMap = {
+        "result": "",
+        "certainty": "",
+    }
     const send_audio = async (e: Event) => {
         const target = e.target as HTMLInputElement
         const file = target.files?.[0];
@@ -74,6 +78,9 @@
             console.log(data);
 
             if (response.ok) { // Status 200
+                resulting_data["certainty"] =  data["certeza_percentual"]
+                resulting_data["result"] = map_to_db[data["classe_predita"]]
+                console.log(resulting_data)
             } else {
             }
         } catch (error) {

@@ -12,4 +12,10 @@ const read_audio_array_buffer = async (url: string) => {
     return arrayBuffer;                          // Return the binary data
 }
 
-export {load_new_audio, read_audio_array_buffer}
+type HashMap = Record<string, string>;
+const map_to_db: HashMap = {
+    "bemtevi": "Bem-te-vi",
+    "sabia" : "Sabiá-laranjeira"
+}
+
+export {load_new_audio, read_audio_array_buffer, map_to_db, HashMap}
