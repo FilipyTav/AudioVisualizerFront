@@ -54,13 +54,15 @@
 </script>
 
 <!-- 90deg #58b873 #8259f0 -->
-<button in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}}
-    onclick={ping_activate}
+<label in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}}
+    for="audio_input"
     class="relative md:w-xs sm:w-sm aspect-square cursor-pointer grid place-items-center-safe
     col-start-1 row-start-1
     ">
 	<div>
 		<img src={logo} alt="Logo center" class="w-sm relative z-1 pointer-events-none">
+        <input type="file" id="audio_input" accept=".wav,.mp3,.ogg"
+        class="hidden">
 		<div class="
 		rounded-full aspect-square inline-block
         animate-[spin_3s_linear_infinite]
@@ -78,7 +80,7 @@
 		style="pointer-events: none;"
 		></div>
 	{/each}
-</button>
+</label>
 
 
 <style lang="postcss">
