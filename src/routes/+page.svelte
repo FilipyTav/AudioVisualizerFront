@@ -48,7 +48,7 @@
         {#if show_visualizer}
             <AudioVisualizer {logo} {hide_vis} {resulting_data}/>
         {:else}
-            <InfoDisplay {resulting_data}/>
+            <InfoDisplay {resulting_data} {show_vis}/>
         {/if}
     </div>
 </section>
