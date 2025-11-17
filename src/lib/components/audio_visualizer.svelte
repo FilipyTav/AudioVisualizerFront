@@ -52,6 +52,7 @@
 		}, .93 * 1000);
     }
 
+    const API_URL = 'http://127.0.0.1:5000/prever';
     const send_audio = async (e: Event) => {
         const target = e.target as HTMLInputElement
         const file = target.files?.[0];
@@ -59,6 +60,26 @@
         if (!file) return;
         console.log(file)
         // analyzing = true
+
+        const form_data: FormData = new FormData();
+        form_data.append('audio_file', file);
+
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                body: form_data
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            if (response.ok) { // Status 200
+            } else {
+            }
+        } catch (error) {
+            console.error('Erro de Rede ou JSON Inválido:', error);
+            // resultadoDiv.innerHTML = '&lt;h2&gt;🛑 Erro de Conexão&lt;/h2&gt;&lt;p&gt;Verifique se o servidor Flask está rodando.&lt;/p&gt;';
+        }
     }
 
 </script>
