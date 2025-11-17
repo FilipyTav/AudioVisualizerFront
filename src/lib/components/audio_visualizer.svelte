@@ -71,7 +71,7 @@
             const data = await response.json();
 
             if (response.ok) { // Status 200
-                resulting_data["certainty"] =  data["certeza_percentual"]
+                resulting_data["precision"] =  data["certeza_percentual"]
                 resulting_data["result"] = map_to_db[data["classe_predita"]]
                 hide_vis()
             } else {

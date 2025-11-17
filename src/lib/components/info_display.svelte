@@ -46,7 +46,7 @@
     {#each data?.info as para, i}
         <div class="
             p-5 wrap-break-words
-            bg-blue-500 text-white flex flex-col items-center justify-center gap-10
+            bg-blue-500 text-white flex flex-col items-center justify-center gap-5
             rounded-lg shadow-lg
             transform transition-all duration-300
             hover:scale-105 hover:bg-blue-600
@@ -57,7 +57,13 @@
             `}
         >
             {#if i === 0}
-                <h1 class="font-bold text-3xl">{data?.name}</h1>
+                <h1 class="font-bold text-3xl text-center">
+                    {data?.name}
+                    <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+                    <div class="bg-yellow-100 h-2 rounded-full" style={`width: ${resulting_data["precision"]}%;`}></div>
+                    </div>
+                    <span class="text-yellow-100 text-lg mt-2">{resulting_data["precision"]}%</span>
+                </h1>
                 <h3 class="font-bold text-xl">{data?.scientific_name}</h3>
             {/if}
             {para}

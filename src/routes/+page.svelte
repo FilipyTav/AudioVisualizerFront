@@ -24,7 +24,7 @@
 
     let resulting_data: HashMap = {
         "result": "",
-        "certainty": "",
+        "precisiont": "",
     }
 
     let show_visualizer: boolean = $state(true);
