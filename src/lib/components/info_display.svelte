@@ -29,9 +29,13 @@
 
     {#each paragraphs as para}
         <p class="
-            col-start-{para.col_start} col-span-{para.col_span}
-            row-start-{para.row_start} row-span-{para.row_span}
-            break-all bg-green-500">
+            break-all bg-green-500
+            "
+            style={`
+            grid-column: ${para.col_start} / span ${para.col_span};
+            grid-row: ${para.row_start} / span ${para.row_span};
+            `}
+        >
             {para.text}
         </p>
     {/each}
