@@ -39,6 +39,7 @@
 	}
 
 	let pings: Ping[] = $state([]);
+    let analyzing: boolean = $state(false)
 	let nextId = 0;
 
 	const ping_activate = () => {
@@ -57,6 +58,7 @@
 
         if (!file) return;
         console.log(file)
+        // analyzing = true
     }
 
 </script>
@@ -79,6 +81,9 @@
         border-gradient
         "></div>
 	</div>
+    {#if analyzing}
+        <p class="text-4xl animate-pulse">Analisando...</p>
+    {/if}
 
 	{#each pings as ping (ping.id)}
 		<div

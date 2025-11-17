@@ -1,6 +1,6 @@
 <style lang="postcss">
 @reference "tailwindcss";
-:global(body) {    
+:global(body) {
     position: relative;
     min-height: 100vh;
     background-image: url('$lib/assets/bg.png');
@@ -24,7 +24,7 @@
 
     let show_visualizer: boolean = $state(true);
 
-    function handleKeydown(event) {
+    function handleKeydown(event: KeyboardEvent) {
         console.log('Key pressed:', event.key);
         if (event.key === 's') {
             console.log('s key detected!');
@@ -39,7 +39,7 @@
 
 <section class="overflow-hidden flex justify-center items-center">
 	<div class="mx-auto my-10 animate-down
-        w-4/5 h-9/10 rounded-lg bg-white/20 backdrop-blur-[3px] p-6 shadow-lg 
+        w-4/5 h-9/10 rounded-lg bg-white/20 backdrop-blur-[3px] p-6 shadow-lg
         grid place-items-center-safe grid-rows-[1fr] grid-cols-[1fr]
         ">
         {#if show_visualizer}
