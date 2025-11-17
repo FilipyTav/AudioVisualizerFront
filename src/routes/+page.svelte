@@ -17,25 +17,22 @@
 
 <script lang="ts">
 	import logo from "$lib/assets/logo.png";
-    import bg from "$lib/assets/bg.png"
     import Nav from "$lib/components/nav.svelte";
     import AudioVisualizer from "$lib/components/audio_visualizer.svelte";
     import InfoDisplay from "$lib/components/info_display.svelte";
 
     let show_visualizer: boolean = $state(true);
 
-    function handleKeydown(event: KeyboardEvent) {
-        console.log('Key pressed:', event.key);
-        if (event.key === 's') {
-            console.log('s key detected!');
-            show_visualizer = !show_visualizer;
-        }
+    const show_vis = () => {
+        show_visualizer = true;
+    }
+
+    const hide_vis = () => {
+        show_visualizer = false;
     }
 </script>
 
 <Nav/>
-
-<svelte:window onkeydown={handleKeydown} />
 
 <section class="overflow-hidden flex justify-center items-center">
 	<div class="mx-auto my-10 animate-down
@@ -43,7 +40,7 @@
         grid place-items-center-safe grid-rows-[1fr] grid-cols-[1fr]
         ">
         {#if show_visualizer}
-            <AudioVisualizer {logo}/>
+            <AudioVisualizer {logo} {hide_vis}/>
         {:else}
             <InfoDisplay />
         {/if}

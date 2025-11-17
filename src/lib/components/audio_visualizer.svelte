@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import { browser } from '$app/environment';
     import { fly } from 'svelte/transition';
-	let { logo } = $props();
+	let { logo, hide_vis } = $props();
     import song from '$lib/assets/test.mp3'
     import { load_new_audio, map_to_db, type HashMap } from '$lib/utils/audio_processing';
 
@@ -81,6 +81,7 @@
                 resulting_data["certainty"] =  data["certeza_percentual"]
                 resulting_data["result"] = map_to_db[data["classe_predita"]]
                 console.log(resulting_data)
+                hide_vis()
             } else {
             }
         } catch (error) {
@@ -130,8 +131,6 @@
 @tailwind utilities;
 
 .circle-pulse {
-    @apply
-    bg-linear-90 from-[#58b873] to-[#8259f0];
 }
 
 .border-gradient {
