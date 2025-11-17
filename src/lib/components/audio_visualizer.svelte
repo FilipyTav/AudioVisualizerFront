@@ -1,41 +1,13 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import { browser } from '$app/environment';
     import { fly } from 'svelte/transition';
 	let { logo, hide_vis, resulting_data } = $props();
-    import song from '$lib/assets/test.mp3'
     import { load_new_audio, map_to_db, type HashMap } from '$lib/utils/audio_processing';
 
-    let audio: HTMLAudioElement;
+    let audio_elem: HTMLAudioElement;
     let reader: FileReader | null = null;
 
     // In seconds
     const ping_interval: number = .2;
-
-    // const play_audio = (): void => {
-    //     console.log(audio);
-    //     if (audio.paused)
-    //         audio.play();
-    //     else audio.pause();
-    // }
-
-    // onMount(() => {
-    //     reader =  new FileReader();
-    //     if (browser) {
-    //         audio = new Audio(song);
-    //         // console.log(audio);
-    //
-    //         (async () => {
-    //             const array_buffer = await load_new_audio(song);
-    //             console.log(array_buffer);
-    //
-    //             const audio_ctx: AudioContext = new AudioContext()
-    //             audio_ctx.decodeAudioData(array_buffer, (audio_buffer) => {
-    //                 console.log(audio_buffer)
-    //             })
-    //         })();
-    //     };
-    // });
 
 	interface Ping {
 		id: number;
@@ -61,6 +33,9 @@
         const file = target.files?.[0];
 
         if (!file) return;
+        const obj_URL = URL.createObjectURL(file);
+        audio_elem.src = obj_URL;
+        audio_elem.play();
 
         const form_data: FormData = new FormData();
         form_data.append('audio_file', file);
@@ -80,6 +55,7 @@
 
             if (response.ok) { // Status 200
                 clearInterval(ping_id)
+                audio_elem.pause()
                 resulting_data["precision"] =  data["certeza_percentual"]
                 resulting_data["result"] = map_to_db[data["classe_predita"]]
                 hide_vis()
@@ -103,6 +79,10 @@
         <input type="file" id="audio_input" accept=".wav,.mp3,.ogg"
         onchange={send_audio}
         class="hidden">
+        <audio src=""
+        class="hidden"
+        bind:this={audio_elem}
+        ></audio>
 		<div class="
 		rounded-full aspect-square inline-block
         animate-[spin_3s_linear_infinite]
