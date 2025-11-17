@@ -33,12 +33,12 @@
     class="grid gap-3 col-start-1 row-start-1 h-max grid-cols-2 sm:grid-cols-3 lg:grid-cols-4
     ">
     <img src={data?.images[0]} alt="Imagem 1"
-        class="bg-red-300
+        class="bg-red-300 h-full
         row-start-1 row-span-2
         col-start-1 col-span-2
         "/>
     <img src={data?.images[1]} alt="Imagem 2"
-        class="bg-purple-300
+        class="bg-purple-300 h-full
         col-start-4 col-span-2
         row-start-3 row-span-3
         "/>
