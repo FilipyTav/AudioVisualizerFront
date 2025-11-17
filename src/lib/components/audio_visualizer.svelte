@@ -63,6 +63,11 @@
         form_data.append('audio_file', file);
 
         try {
+            const ping_id: number = setInterval(() => {
+                console.log("ping")
+                ping_activate()
+            }, .5 * 1000);
+
             const response = await fetch(API_URL, {
                 method: 'POST',
                 body: form_data
@@ -71,6 +76,7 @@
             const data = await response.json();
 
             if (response.ok) { // Status 200
+                clearInterval(ping_id)
                 resulting_data["precision"] =  data["certeza_percentual"]
                 resulting_data["result"] = map_to_db[data["classe_predita"]]
                 hide_vis()
@@ -122,6 +128,7 @@
 @tailwind utilities;
 
 .circle-pulse {
+    background: linear-gradient(to right, #58b873, #8259f0); /* gradient border */
 }
 
 .border-gradient {
