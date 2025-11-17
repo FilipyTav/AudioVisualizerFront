@@ -19,17 +19,20 @@
     ]
 </script>
 
+    <!-- grid-cols-[repeat(5,minmax(100px,1fr))] grid-rows-[repeat(5,minmax(100px,1fr))] -->
 <div in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}}
-    class="grid gap-3 col-start-1 row-start-1
-    grid-cols-[repeat(5,minmax(100px,500px))] grid-rows-[repeat(5,minmax(100px,100px))]">
-    <div class="bg-red-300
+    class="grid gap-3 col-start-1 row-start-1 h-max
+    ">
+    <img src={data?.images[0]} alt="Imagem 1"
+        class="bg-red-300
         row-start-1 row-span-2
         col-start-1 col-span-2
-        "></div>
-    <div class="bg-purple-300
+        "/>
+    <img src={data?.images[1]} alt="Imagem 2"
+        class="bg-purple-300
         col-start-4 col-span-2
         row-start-3 row-span-3
-        "></div>
+        "/>
 
     {#each data?.info as para, i}
         <div class="
