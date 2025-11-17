@@ -30,7 +30,7 @@
 
     <!-- grid-cols-[repeat(5,minmax(100px,1fr))] grid-rows-[repeat(5,minmax(100px,1fr))] -->
 <div in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}}
-    class="grid gap-3 col-start-1 row-start-1 h-max
+    class="grid gap-3 col-start-1 row-start-1 h-max grid-cols-2 sm:grid-cols-3 lg:grid-cols-4
     ">
     <img src={data?.images[0]} alt="Imagem 1"
         class="bg-red-300
@@ -45,7 +45,11 @@
 
     {#each data?.info as para, i}
         <div class="
-            break-all bg-green-500 p-5 break-normal
+            p-5 wrap-break-words
+            bg-blue-500 text-white flex flex-col items-center justify-center gap-10
+            rounded-lg shadow-lg
+            transform transition-all duration-300
+            hover:scale-105 hover:bg-blue-600
             "
             style={`
             grid-column: ${paragraphs[i].col_start} / span ${paragraphs[i].col_span};
@@ -53,8 +57,8 @@
             `}
         >
             {#if i === 0}
-                <p class="font-bold">{data?.name}</p>
-                <p class="font-bold">{data?.scientific_name}</p>
+                <h1 class="font-bold text-3xl">{data?.name}</h1>
+                <h3 class="font-bold text-xl">{data?.scientific_name}</h3>
             {/if}
             {para}
         </div>
