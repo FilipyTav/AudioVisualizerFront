@@ -7,7 +7,7 @@
     let reader: FileReader | null = null;
 
     // In seconds
-    const ping_interval: number = .2;
+    const ping_interval: number = .3;
 
 	interface Ping {
 		id: number;
@@ -55,9 +55,9 @@
 
             if (response.ok) { // Status 200
                 clearInterval(ping_id)
-                audio_elem.pause()
                 resulting_data["precision"] =  data["certeza_percentual"]
                 resulting_data["result"] = map_to_db[data["classe_predita"]]
+                // audio_elem.pause()
                 hide_vis()
             } else {
             }
