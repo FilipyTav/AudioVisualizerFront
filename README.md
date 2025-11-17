@@ -1,38 +1,37 @@
-# sv
+# Frontend Identificador de Som
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Este é um projeto desenvolvido com SvelteKit, utilizando Yarn como gerenciador de pacotes.
 
-## Creating a project
+## Requerimentos
 
-If you're seeing this, you've probably already done this step. Congrats!
+- npm
+- yarn
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Como baixar e rodar o projeto
 
-# create a new project in my-app
-npx sv create my-app
+
+### 1. Clonar o repositório
+
+```bash
+git clone <URL-do-repositório>
 ```
 
-## Developing
+### 2. Entrar na pasta do projeto
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```bash
+cd <nome-da-pasta-do-projeto>
 ```
 
-## Building
+### 3. Instalar as dependências
 
-To create a production version of your app:
-
-```sh
-npm run build
+```bash
+yarn install
 ```
 
-You can preview the production build with `npm run preview`.
+### 4. Rodar em modo de desenvolvimento
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```bash
+yarn run dev
+```
+
+O servidor estará rodando em http://localhost:5173, e poderá ser acessado pelo navegador.
