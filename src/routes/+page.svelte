@@ -38,6 +38,11 @@
     }
 </script>
 
+<svelte:head>
+    <title>Bugados</title>
+</svelte:head>
+
+
 <Nav/>
 
 <section class="overflow-hidden flex justify-center items-center">
