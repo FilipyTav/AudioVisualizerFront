@@ -2,12 +2,11 @@
     import { fly } from 'svelte/transition';
 	let { logo, hide_vis, resulting_data } = $props();
     import { load_new_audio, map_to_db, type HashMap } from '$lib/utils/audio_processing';
+    import { ANALYSIS_DELAY, PING_ANIME_INTERVAL } from '$lib/utils/config';
+    import { sleep } from '$lib/utils/utils';
 
     let audio_elem: HTMLAudioElement;
     let reader: FileReader | null = null;
-
-    // In seconds
-    const ping_interval: number = .3;
 
 	interface Ping {
 		id: number;
@@ -44,7 +43,7 @@
             const ping_id: number = setInterval(() => {
                 console.log("ping")
                 if (Math.random() < 0.5) ping_activate()
-            }, ping_interval * 1000);
+            }, PING_ANIME_INTERVAL * 1000);
 
             const response = await fetch(API_URL, {
                 method: 'POST',
@@ -52,6 +51,7 @@
             });
 
             const data = await response.json();
+            await sleep(ANALYSIS_DELAY);
 
             if (response.ok) { // Status 200
                 clearInterval(ping_id)
