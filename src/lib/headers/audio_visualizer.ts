@@ -12,42 +12,46 @@ const play_audio = (file: File, audio_elem: HTMLAudioElement): void => {
     audio_elem.play();
 };
 
-// Function to start recording using async/await
-const start_recording = async () => {
+// Usage:
+// const audioUrl: string | null = await startRecording();
+// if (audio_url) {
+//     console.log("Recording complete, audio URL:", audio_url);
+//     // You can use the audio URL in an <audio> element, or download it
+//     const audio_element: HTMLAudioElement = new Audio(audio_url);
+//     audio_element.play();
+// }
+const start_recording = async (): Promise<string | null> => {
     try {
-        // Access the microphone
-        const stream = await navigator.mediaDevices.getUserMedia({
+        const stream: MediaStream = await navigator.mediaDevices.getUserMedia({
             audio: true,
         });
 
-        // Create a MediaRecorder to record the audio
-        const media_recorder = new MediaRecorder(stream);
-        const audio_chunks = [];
+        const media_recorder: MediaRecorder = new MediaRecorder(stream);
+        const audio_chunks: Blob[] = [];
 
-        // When data is available, store the audio chunks
-        media_recorder.ondataavailable = (event) => {
+        media_recorder.ondataavailable = (event: BlobEvent) => {
             audio_chunks.push(event.data);
         };
 
-        // When the recording stops, create a Blob and play the audio
-        media_recorder.onstop = () => {
-            const audio_blob = new Blob(audio_chunks, { type: "audio/wav" });
-            const audio_url = URL.createObjectURL(audio_blob);
-            const audio = new Audio(audio_url);
-            audio.play();
-        };
-
-        // Start recording
         media_recorder.start();
 
-        // Stop recording after 5 seconds
-        await new Promise((resolve) => setTimeout(resolve, 5000));
+        await new Promise<void>((resolve) => setTimeout(resolve, 5000));
 
-        // Stop the recording after 5 seconds
         media_recorder.stop();
-        stream.getTracks().forEach((track) => track.stop()); // Stop the stream
+        stream.getTracks().forEach((track: MediaStreamTrack) => track.stop()); // Stop the stream
+
+        return new Promise((resolve) => {
+            media_recorder.onstop = () => {
+                const audio_blob: Blob = new Blob(audio_chunks, {
+                    type: "audio/wav",
+                });
+                const audio_url: string = URL.createObjectURL(audio_blob);
+                resolve(audio_url);
+            };
+        });
     } catch (err) {
         console.error("Error accessing microphone:", err);
+        return null;
     }
 };
 
