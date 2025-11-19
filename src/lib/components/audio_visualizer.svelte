@@ -1,9 +1,10 @@
 <script lang="ts">
     import { fly } from 'svelte/transition';
 	let { logo, hide_vis, resulting_data } = $props();
-    import { load_new_audio, map_to_db, type HashMap } from '$lib/utils/audio_processing';
-    import { ANALYSIS_DELAY, PING_ANIME_INTERVAL } from '$lib/utils/config';
+    import { map_to_db } from '$lib/utils/audio_processing';
+    import { ANALYSIS_DELAY, API_URL, PING_ANIME_INTERVAL } from '$lib/utils/config';
     import { sleep } from '$lib/utils/utils';
+    import { get_audio, play_audio } from '$lib/headers/audio_visualizer';
 
     let audio_elem: HTMLAudioElement;
     let reader: FileReader | null = null;
@@ -26,12 +27,11 @@
 		}, .93 * 1000);
     }
 
-    const API_URL = 'http://127.0.0.1:5000/prever';
     const send_audio = async (e: Event) => {
         const file = await get_audio(e);
         if (!file) return;
 
-        play_audio(file);
+        play_audio(file, audio_elem);
 
         const form_data: FormData = new FormData();
         form_data.append('audio_file', file);
@@ -60,19 +60,6 @@
         } catch (error) {
             console.error('Erro de Rede ou JSON Inválido:', error);
         }
-    }
-
-    const get_audio = async (e: Event) => {
-        const target = e.target as HTMLInputElement;
-        const file = target.files?.[0];
-        if (!file) return
-
-        return file;
-    }
-    const play_audio = (file: File): void => {
-        const obj_URL = URL.createObjectURL(file);
-        audio_elem.src = obj_URL;
-        audio_elem.play();
     }
 </script>
 
