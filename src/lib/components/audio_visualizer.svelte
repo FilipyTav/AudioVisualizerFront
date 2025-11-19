@@ -28,20 +28,16 @@
 
     const API_URL = 'http://127.0.0.1:5000/prever';
     const send_audio = async (e: Event) => {
-        const target = e.target as HTMLInputElement
-        const file = target.files?.[0];
-
+        const file = await get_audio(e);
         if (!file) return;
-        const obj_URL = URL.createObjectURL(file);
-        audio_elem.src = obj_URL;
-        audio_elem.play();
+
+        play_audio(file);
 
         const form_data: FormData = new FormData();
         form_data.append('audio_file', file);
 
         try {
             const ping_id: number = setInterval(() => {
-                console.log("ping")
                 if (Math.random() < 0.5) ping_activate()
             }, PING_ANIME_INTERVAL * 1000);
 
@@ -66,6 +62,18 @@
         }
     }
 
+    const get_audio = async (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        const file = target.files?.[0];
+        if (!file) return
+
+        return file;
+    }
+    const play_audio = (file: File): void => {
+        const obj_URL = URL.createObjectURL(file);
+        audio_elem.src = obj_URL;
+        audio_elem.play();
+    }
 </script>
 
 <!-- 90deg #58b873 #8259f0 -->
