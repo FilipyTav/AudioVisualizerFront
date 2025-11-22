@@ -69,7 +69,7 @@
 
 <!-- 90deg #58b873 #8259f0 -->
 <div in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}}
-    class="relative md:w-xs sm:w-sm aspect-square cursor-pointer grid place-items-center-safe
+    class="relative md:w-xs sm:w-sm aspect-square grid place-items-center-safe
     col-start-1 row-start-1 gap-5
     ">
     <audio src=""
@@ -77,7 +77,7 @@
     bind:this={audio_elem}
     ></audio>
 
-	<button class="relative"
+	<button class="relative cursor-pointer"
         onclick={record_audio}
     >
 		<img src={logo} alt="Logo center" class="w-sm relative z-1 pointer-events-none">
@@ -99,26 +99,31 @@
         {/each}
 	</button>
 
-    {#if analyzing}
-        <p transition:fade
-            class="text-4xl animate-pulse">Analisando...</p>
-    {:else}
-        <label transition:fade
-            for="audio_input"
-            class="h-10 w-1/2 py-.5 cursor-pointer
-            grid place-items-center
-            upload-gradient
-            frosted-glass
-            ">
-                <img src="/icons/icon_upload.png" alt="Upload Icon"
-                    class="h-5 w-5"
-                >
+    <div class="w-full grid place-items-center grid-cols-1 grid-rows-1">
+        {#if analyzing}
+            <p transition:fade
+                class="text-4xl animate-pulse text-white
+                col-start-1 row-start-1
+                ">Analisando...</p>
+        {:else}
+            <label transition:fade
+                for="audio_input"
+                class="h-10 w-2/3 py-.5 cursor-pointer
+                grid place-items-center
+                upload-gradient
+                frosted-glass
+                col-start-1 row-start-1
+                ">
+                    <img src="/icons/icon_upload.png" alt="Upload Icon"
+                        class="h-5 w-5"
+                    >
 
-                <input type="file" id="audio_input" accept=".wav,.mp3,.ogg"
-                onchange={send_audio}
-                class="hidden">
-        </label>
-    {/if}
+                    <input type="file" id="audio_input" accept=".wav,.mp3,.ogg"
+                    onchange={send_audio}
+                    class="hidden">
+            </label>
+        {/if}
+    </div>
 
 </div>
 
