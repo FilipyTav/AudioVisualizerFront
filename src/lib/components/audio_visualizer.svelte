@@ -3,7 +3,7 @@
 	let { logo, hide_vis, resulting_data } = $props();
     import { map_to_db } from '$lib/utils/audio_processing';
     import { PING_ANIME_INTERVAL } from '$lib/utils/config';
-    import { get_uploaded_audio, play_audio, send_to_backend } from '$lib/headers/audio_visualizer';
+    import { download_audio, get_uploaded_audio, play_audio, record_iot, send_to_backend } from '$lib/headers/audio_visualizer';
 
     let audio_elem: HTMLAudioElement;
     let reader: FileReader | null = null;
@@ -14,6 +14,7 @@
 
 	let pings: Ping[] = $state([]);
     let analyzing: boolean = $state(false)
+    let recording: boolean = $state(false)
 	let nextId = 0;
 
 	const ping_activate = () => {
@@ -60,8 +61,27 @@
         }
     }
 
-    const record_audio = () => {
+    const record_audio = async () => {
         analyzing = !analyzing;
+
+        const ping_id = start_analysis()
+        recording = true;
+        const response = await record_iot();
+        const file = await download_audio();
+        if (!file) return;
+
+        recording = false;
+        try {
+            const data = await send_to_backend(file);
+            if (data) {
+                end_analysis(ping_id);
+                resulting_data["precision"] = data["certeza_percentual"]
+                resulting_data["result"] = map_to_db[data["classe_predita"]]
+                hide_vis()
+            }
+        } catch (error) {
+            console.error('Erro de Rede ou JSON Inválido:', error);
+        }
     }
 </script>
 
@@ -102,7 +122,7 @@
             <p transition:fade
                 class="text-4xl animate-pulse text-white
                 col-start-1 row-start-1
-                ">Analisando...</p>
+                ">{recording ? "Gravando" : "Analisando"}...</p>
         {:else}
             <label transition:fade
                 for="audio_input"

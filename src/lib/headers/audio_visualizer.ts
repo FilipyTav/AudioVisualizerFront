@@ -1,4 +1,4 @@
-import { ANALYSIS_DELAY, API_URL, PING_ANIME_INTERVAL } from '$lib/utils/config';
+import { ANALYSIS_DELAY, API_URL, ESP32_IP, PING_ANIME_INTERVAL } from '$lib/utils/config';
 import { sleep } from '$lib/utils/utils';
 
 const get_uploaded_audio = async (e: Event) => {
@@ -58,7 +58,7 @@ const record_microphone = async (): Promise<string | null> => {
     }
 };
 
-const record_audio = async () => {
+const record_iot = async () => {
     try {
         const record_response = await fetch(ESP32_IP + '/record');
 
@@ -121,4 +121,4 @@ const send_to_backend = async (file: File) => {
     return null;
 }
 
-export { get_uploaded_audio, send_to_backend, play_audio, record_audio, download_audio };
+export { get_uploaded_audio, send_to_backend, play_audio, record_iot, download_audio };
