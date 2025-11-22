@@ -18,41 +18,4 @@ const map_to_db: HashMap = {
     "sabia" : "Sabiá-laranjeira"
 }
 
-const record_audio = async () => {
-    try {
-        const record_response = await fetch(ESP32_IP + '/record');
-
-        if (!record_response.ok) throw new Error(`Erro no ESP32: ${recordResponse.statusText}`);
-
-        const record_text = await record_response.text();
-        console.log("ESP32:", record_text);
-
-        return record_response;
-    } catch (error) {
-        console.error('Falha na comunicação com o ESP32:', error);
-    }
-
-    return null;
-}
-
-const download_audio = async () => {
-    try {
-        const audio_response = await fetch(ESP32_IP + '/audio');
-
-        if (!audio_response.ok) throw new Error(`Erro ao baixar áudio: ${audio_response.statusText}`);
-
-        const audio_blob = await audio_response.blob();
-
-        const audio_file = new File([audio_blob], "esp32_gravacao.wav", { type: "audio/wav" });
-
-        return audio_file;
-
-        // setupAudioPlayer(audio_file);
-        //
-        // await uploadFileToBackend(audio_file);
-    } catch (error) {
-        console.error('Falha na comunicação com o ESP32:', error);
-    }
-}
-
 export {load_new_audio, read_audio_array_buffer, map_to_db, HashMap}

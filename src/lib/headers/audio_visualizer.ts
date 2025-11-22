@@ -1,4 +1,4 @@
-const get_audio = async (e: Event) => {
+const get_uploaded_audio = async (e: Event) => {
     const target = e.target as HTMLInputElement;
     const file = target.files?.[0];
     if (!file) return;
@@ -20,7 +20,7 @@ const play_audio = (file: File, audio_elem: HTMLAudioElement): void => {
 //     const audio_element: HTMLAudioElement = new Audio(audio_url);
 //     audio_element.play();
 // }
-const start_recording = async (): Promise<string | null> => {
+const record_microphone = async (): Promise<string | null> => {
     try {
         const stream: MediaStream = await navigator.mediaDevices.getUserMedia({
             audio: true,
@@ -55,4 +55,66 @@ const start_recording = async (): Promise<string | null> => {
     }
 };
 
-export { get_audio, play_audio, start_recording };
+const record_audio = async () => {
+    try {
+        const record_response = await fetch(ESP32_IP + '/record');
+
+        if (!record_response.ok) throw new Error(`Erro no ESP32: ${recordResponse.statusText}`);
+
+        const record_text = await record_response.text();
+        console.log("ESP32:", record_text);
+
+        return record_response;
+    } catch (error) {
+        console.error('Falha na comunicação com o ESP32:', error);
+    }
+
+    return null;
+}
+
+const download_audio = async () => {
+    try {
+        const audio_response = await fetch(ESP32_IP + '/audio');
+
+        if (!audio_response.ok) throw new Error(`Erro ao baixar áudio: ${audio_response.statusText}`);
+
+        const audio_blob = await audio_response.blob();
+
+        const audio_file = new File([audio_blob], "esp32_gravacao.wav", { type: "audio/wav" });
+
+        return audio_file;
+
+        // setupAudioPlayer(audio_file);
+        //
+        // await uploadFileToBackend(audio_file);
+    } catch (error) {
+        console.error('Falha na comunicação com o ESP32:', error);
+    }
+}
+
+const send_to_backend = async (file: File, analyzing: bool, ) => {
+    const form_data: FormData = new FormData();
+    form_data.append('audio_file', file);
+
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            body: form_data
+        });
+
+        const data = await response.json();
+        await sleep(ANALYSIS_DELAY);
+
+        if (response.ok) { // Status 200
+            resulting_data["precision"] =  data["certeza_percentual"]
+            resulting_data["result"] = map_to_db[data["classe_predita"]]
+            // audio_elem.pause()
+            hide_vis()
+        } else {
+        }
+    } catch (error) {
+        console.error('Erro de Rede ou JSON Inválido:', error);
+    }
+}
+
+export { get_uploaded_audio, play_audio, record_audio, download_audio };

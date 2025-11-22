@@ -4,7 +4,7 @@
     import { map_to_db } from '$lib/utils/audio_processing';
     import { ANALYSIS_DELAY, API_URL, PING_ANIME_INTERVAL } from '$lib/utils/config';
     import { sleep } from '$lib/utils/utils';
-    import { get_audio, play_audio } from '$lib/headers/audio_visualizer';
+    import { get_uploaded_audio, play_audio } from '$lib/headers/audio_visualizer';
 
     let audio_elem: HTMLAudioElement;
     let reader: FileReader | null = null;
@@ -27,8 +27,22 @@
 		}, .93 * 1000);
     }
 
+    const start_analysis = (): number => {
+        analyzing = true;
+        const ping_id: number = setInterval(() => {
+            if (Math.random() < 0.5) ping_activate()
+        }, PING_ANIME_INTERVAL * 1000);
+
+        return ping_id;
+    }
+
+    const end_analysis = (ping_id: number): void => {
+        clearInterval(ping_id)
+        analyzing = false;
+    }
+
     const send_audio = async (e: Event) => {
-        const file = await get_audio(e);
+        const file = await get_uploaded_audio(e);
         if (!file) return;
 
         play_audio(file, audio_elem);
@@ -37,10 +51,7 @@
         form_data.append('audio_file', file);
 
         try {
-            analyzing = true;
-            const ping_id: number = setInterval(() => {
-                if (Math.random() < 0.5) ping_activate()
-            }, PING_ANIME_INTERVAL * 1000);
+            const ping_id = start_analysis();
 
             const response = await fetch(API_URL, {
                 method: 'POST',
@@ -51,8 +62,7 @@
             await sleep(ANALYSIS_DELAY);
 
             if (response.ok) { // Status 200
-                clearInterval(ping_id)
-                analyzing = false;
+                end_analysis(ping_id);
                 resulting_data["precision"] =  data["certeza_percentual"]
                 resulting_data["result"] = map_to_db[data["classe_predita"]]
                 // audio_elem.pause()
