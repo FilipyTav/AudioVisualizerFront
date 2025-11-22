@@ -67,10 +67,10 @@
         const ping_id = start_analysis()
         recording = true;
         const response = await record_iot();
+        recording = false;
         const file = await download_audio();
         if (!file) return;
 
-        recording = false;
         try {
             const data = await send_to_backend(file);
             if (data) {
