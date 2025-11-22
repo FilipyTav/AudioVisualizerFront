@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { fly } from 'svelte/transition';
+    import { fade, fly } from 'svelte/transition';
 	let { logo, hide_vis, resulting_data } = $props();
     import { map_to_db } from '$lib/utils/audio_processing';
     import { ANALYSIS_DELAY, API_URL, PING_ANIME_INTERVAL } from '$lib/utils/config';
@@ -61,52 +61,80 @@
             console.error('Erro de Rede ou JSON Inválido:', error);
         }
     }
+
+    const record_audio = () => {
+        analyzing = !analyzing;
+    }
 </script>
 
 <!-- 90deg #58b873 #8259f0 -->
-<label in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}}
-    for="audio_input"
+<div in:fly={{y: 1000, duration: 1 * 1000, delay: 1 * 1000}} out:fly={{y: 1000, duration: 1 * 1000}}
     class="relative md:w-xs sm:w-sm aspect-square cursor-pointer grid place-items-center-safe
-    col-start-1 row-start-1
+    col-start-1 row-start-1 gap-5
     ">
-	<div>
+    <audio src=""
+    class="hidden"
+    bind:this={audio_elem}
+    ></audio>
+
+	<button class="relative"
+        onclick={record_audio}
+    >
 		<img src={logo} alt="Logo center" class="w-sm relative z-1 pointer-events-none">
-        <input type="file" id="audio_input" accept=".wav,.mp3,.ogg"
-        onchange={send_audio}
-        class="hidden">
-        <audio src=""
-        class="hidden"
-        bind:this={audio_elem}
-        ></audio>
 		<div class="
 		rounded-full aspect-square inline-block
         animate-[spin_3s_linear_infinite]
 		absolute inset-0
         border-gradient
         "></div>
-	</div>
+
+        {#each pings as ping (ping.id)}
+            <div
+            class="
+            absolute inset-0 rounded-full opacity-75 animate-ping
+            gradient-border
+            "
+            style="pointer-events: none;"
+            ></div>
+        {/each}
+	</button>
+
     {#if analyzing}
-        <p class="text-4xl animate-pulse">Analisando...</p>
+        <p transition:fade
+            class="text-4xl animate-pulse">Analisando...</p>
+    {:else}
+        <label transition:fade
+            for="audio_input"
+            class="h-10 w-1/2 py-.5 cursor-pointer
+            grid place-items-center
+            upload-gradient
+            frosted-glass
+            ">
+                <img src="/icons/icon_upload.png" alt="Upload Icon"
+                    class="h-5 w-5"
+                >
+
+                <input type="file" id="audio_input" accept=".wav,.mp3,.ogg"
+                onchange={send_audio}
+                class="hidden">
+        </label>
     {/if}
 
-	{#each pings as ping (ping.id)}
-		<div
-		class="
-		absolute inset-0 rounded-full opacity-75 animate-ping
-		circle-pulse
-		"
-		style="pointer-events: none;"
-		></div>
-	{/each}
-</label>
+</div>
 
 
 <style lang="postcss">
 @reference "tailwindcss";
 @tailwind utilities;
 
-.circle-pulse {
+.gradient-border {
     background: linear-gradient(to right, #58b873, #8259f0); /* gradient border */
+}
+
+.upload-gradient {
+    border-width: 4px;
+    border-radius: 12px;
+    border-image: linear-gradient(to right, #58b873, #8259f0) 1;
 }
 
 .border-gradient {
@@ -116,4 +144,10 @@
         linear-gradient(to right, #58b873, #8259f0) border-box; /* gradient border */
 }
 
+.frosted-glass {
+    background: rgba(255, 255, 255, 0.7);  /* Semi-transparent white */
+    backdrop-blur: 10px;  /* Apply blur to the background */
+    border-radius: 10px;  /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Optional shadow for depth */
+}
 </style>
