@@ -7,8 +7,7 @@ Este é um projeto desenvolvido com SvelteKit, utilizando Yarn como gerenciador 
 - npm
 - yarn
 
-## Como baixar e rodar o projeto
-
+## Como baixar e rodar o projeto - Frontend
 
 ### 1. Clonar o repositório
 
@@ -33,5 +32,27 @@ yarn install
 ```bash
 yarn run dev
 ```
-
 O servidor estará rodando em http://localhost:5173, e poderá ser acessado pelo navegador.
+
+## Como baixar e rodar o projeto - Backend
+
+Para funcionar, o Backend precisa estar rodando.
+
+### Local
+
+```bash
+cd src/backend/
+```
+
+### Instalar dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+### Rodar
+```bash
+{python.exe} api_classificacao.py
+```
+
+O servidor estará rodando em http://127.0.0.1:5000
