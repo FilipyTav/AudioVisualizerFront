@@ -56,3 +56,11 @@ pip install -r requirements.txt
 ```
 
 O servidor estará rodando em http://127.0.0.1:5000
+
+## IoT
+
+O IP do ESP32 precisa ser configurado pelo arquivo
+
+```bash
+src/lib/utils/config.ts
+```
