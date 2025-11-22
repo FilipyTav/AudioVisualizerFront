@@ -1,3 +1,6 @@
+import { ANALYSIS_DELAY, API_URL, PING_ANIME_INTERVAL } from '$lib/utils/config';
+import { sleep } from '$lib/utils/utils';
+
 const get_uploaded_audio = async (e: Event) => {
     const target = e.target as HTMLInputElement;
     const file = target.files?.[0];
@@ -92,7 +95,8 @@ const download_audio = async () => {
     }
 }
 
-const send_to_backend = async (file: File, analyzing: bool, ) => {
+// true if ok, false otherwise
+const send_to_backend = async (file: File) => {
     const form_data: FormData = new FormData();
     form_data.append('audio_file', file);
 
@@ -106,15 +110,15 @@ const send_to_backend = async (file: File, analyzing: bool, ) => {
         await sleep(ANALYSIS_DELAY);
 
         if (response.ok) { // Status 200
-            resulting_data["precision"] =  data["certeza_percentual"]
-            resulting_data["result"] = map_to_db[data["classe_predita"]]
-            // audio_elem.pause()
-            hide_vis()
+            return data;
         } else {
+            return null;
         }
     } catch (error) {
         console.error('Erro de Rede ou JSON Inválido:', error);
     }
+
+    return null;
 }
 
-export { get_uploaded_audio, play_audio, record_audio, download_audio };
+export { get_uploaded_audio, send_to_backend, play_audio, record_audio, download_audio };

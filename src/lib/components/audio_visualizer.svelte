@@ -2,9 +2,8 @@
     import { fade, fly } from 'svelte/transition';
 	let { logo, hide_vis, resulting_data } = $props();
     import { map_to_db } from '$lib/utils/audio_processing';
-    import { ANALYSIS_DELAY, API_URL, PING_ANIME_INTERVAL } from '$lib/utils/config';
-    import { sleep } from '$lib/utils/utils';
-    import { get_uploaded_audio, play_audio } from '$lib/headers/audio_visualizer';
+    import { PING_ANIME_INTERVAL } from '$lib/utils/config';
+    import { get_uploaded_audio, play_audio, send_to_backend } from '$lib/headers/audio_visualizer';
 
     let audio_elem: HTMLAudioElement;
     let reader: FileReader | null = null;
@@ -47,27 +46,14 @@
 
         play_audio(file, audio_elem);
 
-        const form_data: FormData = new FormData();
-        form_data.append('audio_file', file);
-
         try {
-            const ping_id = start_analysis();
-
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                body: form_data
-            });
-
-            const data = await response.json();
-            await sleep(ANALYSIS_DELAY);
-
-            if (response.ok) { // Status 200
+            const ping_id = start_analysis()
+            const data = await send_to_backend(file);
+            if (data) {
                 end_analysis(ping_id);
                 resulting_data["precision"] =  data["certeza_percentual"]
                 resulting_data["result"] = map_to_db[data["classe_predita"]]
-                // audio_elem.pause()
                 hide_vis()
-            } else {
             }
         } catch (error) {
             console.error('Erro de Rede ou JSON Inválido:', error);
