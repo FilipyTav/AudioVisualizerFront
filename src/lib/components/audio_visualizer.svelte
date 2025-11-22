@@ -37,6 +37,7 @@
         form_data.append('audio_file', file);
 
         try {
+            analyzing = true;
             const ping_id: number = setInterval(() => {
                 if (Math.random() < 0.5) ping_activate()
             }, PING_ANIME_INTERVAL * 1000);
@@ -51,6 +52,7 @@
 
             if (response.ok) { // Status 200
                 clearInterval(ping_id)
+                analyzing = false;
                 resulting_data["precision"] =  data["certeza_percentual"]
                 resulting_data["result"] = map_to_db[data["classe_predita"]]
                 // audio_elem.pause()
