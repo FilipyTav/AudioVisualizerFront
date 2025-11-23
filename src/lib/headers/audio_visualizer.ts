@@ -62,7 +62,7 @@ const record_iot = async () => {
     try {
         const record_response = await fetch(ESP32_IP + '/record');
 
-        if (!record_response.ok) throw new Error(`Erro no ESP32: ${recordResponse.statusText}`);
+        if (!record_response.ok) throw new Error(`Erro no ESP32: ${record_response.statusText}`);
 
         const record_text = await record_response.text();
         console.log("ESP32:", record_text);
