@@ -72,7 +72,7 @@ src/lib/utils/config.ts
 |-------------|--------|
 | **Denival Biotto Filho** | Back End (Desenvolvimento de Código) |
 | **Filipe Gomes Ferreira** | Back End (Desenvolvimento de Código) |
-| **Filipy Tavares dos Santos** | Front End (HTML) |
+| **Filipy Tavares dos Santos** | Front End (Código e estrutura) |
 | **Naum Calebe Félix Sarti** | Front End (Design e Interface) |
 | **Luan Vitor Pereira Rocha** | IoT (Desenvolvimento de Sensores e Coleta de Dados) |
 | **Luiz Otávio Machado Seles** | IoT (Integração de Dispositivo) |
