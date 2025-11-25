@@ -66,6 +66,7 @@ src/lib/utils/config.ts
 ```
 
 ## Equipe
+---
 
 | Integrante | Função |
 |-------------|--------|
