@@ -39,7 +39,7 @@
 </script>
 
 <svelte:head>
-    <title>Bugados</title>
+    <title>AURIS</title>
 </svelte:head>
 
 
