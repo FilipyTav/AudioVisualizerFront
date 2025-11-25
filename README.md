@@ -64,3 +64,19 @@ O IP do ESP32 precisa ser configurado pelo arquivo
 ```bash
 src/lib/utils/config.ts
 ```
+
+## Equipe
+
+| Integrante | Função |
+|-------------|--------|
+| **Denival Biotto Filho** | Back End (Desenvolvimento de Código) |
+| **Filipe Gomes Ferreira** | Back End (Desenvolvimento de Código) |
+| **Filipy Tavares dos Santos** | Front End (HTML) |
+| **Naum Calebe Félix Sarti** | Front End (Design e Interface) |
+| **Luan Vitor Pereira Rocha** | IoT (Desenvolvimento de Sensores e Coleta de Dados) |
+| **Luiz Otávio Machado Seles** | IoT (Integração de Dispositivo) |
+| **Pedro Azevedo Batista (Piphoka)** | Apresentação, Pesquisa Teórica e Integração |
+| **Rafael Magesto** | Modelo 3D do IoT |
+| **Luis Henrique da Silva** | Dados |
+
+---
