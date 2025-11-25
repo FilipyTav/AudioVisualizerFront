@@ -1,4 +1,4 @@
-# Frontend Identificador de Som
+# Frontend AURIS
 
 Este é um projeto desenvolvido com SvelteKit, utilizando Yarn como gerenciador de pacotes.
 
@@ -34,7 +34,7 @@ yarn run dev
 ```
 O servidor estará rodando em http://localhost:5173, e poderá ser acessado pelo navegador.
 
-## Como baixar e rodar o projeto - Backend
+## Backend
 
 Para funcionar, o Backend precisa estar rodando.
 
